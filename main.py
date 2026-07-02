@@ -9,6 +9,7 @@ highJumpLog = {
     
 }
 
+# when we open the file for the first time we have to load the previous jumps
 with open("high-jump-log.json", "r") as file:
     highJumpLog = json.load(file)
 
@@ -34,7 +35,7 @@ def main():
         with open("high-jump-log.json", "w") as file:
             json.dump(highJumpLog, file)
 
-        userInput = input("""Here is what you can do in the app:\n1. Add a new jump to your training log (in meters)
+        userInput = input("""Here is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
         \n3. View your personal best and when it was achieved
         \n4. Leave app
@@ -46,34 +47,49 @@ def main():
         log we will append the new log into the list that has all of the logs.
         '''
         if userInput == "1":
-            try:
-                newlog = float(input("\nIn meters what height did you achieve? "))
-                # newlog = f"{newlog:.2f}
+            addOrDelte = input("\n1. Add a jump\n2. Delete a jump\nWould you like to: ")
+            if addOrDelte == "1":
+                try:
+                    newlog = float(input("\nIn meters what height did you achieve? "))
+                    # newlog = f"{newlog:.2f}
 
-                if newlog <= 0.00:
-                    print("\nYou cant jump negative meters dude.")
+                    if newlog <= 0.00:
+                        print("\nYou cant jump negative meters dude.")
 
-                elif newlog <= 1.00:
-                    highJumpLog["height"].append(newlog)
-                    print("\nAdded to log")
-                    print(f"Good start. {newlog} meters is good but you can do better\n")
-                elif newlog <= 1.50:
-                    highJumpLog["height"].append(newlog)
-                    print("\nAdded to log")
-                    print(f"that is pretty solid. {newlog} meters is solid\n")
-                elif newlog <= 2.00:
-                    highJumpLog["height"].append(newlog)
-                    print("\nAdded to log")
-                    print(f"dang you jumping. {newlog} meters is good\n")
-                elif newlog >= 2.00:
-                    highJumpLog["height"].append(newlog)
-                    print("\nAdded to log")
-                    print(f"Wowza. {newlog} meters is amazing\n")
-                
-            except ValueError:
-                print("Please input a number.\n")
+                    elif newlog <= 1.00:
+                        highJumpLog["height"].append(newlog)
+                        print("\nAdded to log")
+                        print(f"Good start. {newlog} meters is good but you can do better\n")
+                    elif newlog <= 1.50:
+                        highJumpLog["height"].append(newlog)
+                        print("\nAdded to log")
+                        print(f"that is pretty solid. {newlog} meters is solid\n")
+                    elif newlog <= 2.00:
+                        highJumpLog["height"].append(newlog)
+                        print("\nAdded to log")
+                        print(f"dang you jumping. {newlog} meters is good\n")
+                    elif newlog >= 2.00:
+                        highJumpLog["height"].append(newlog)
+                        print("\nAdded to log")
+                        print(f"Wowza. {newlog} meters is amazing\n")
+                    
+                except ValueError:
+                    print("Please input a number.\n")
+            elif addOrDelte == "2":
+                index = 1
+                print("Here is your training log:\n")
+                for jump in highJumpLog["height"]:
+                    print(f"Jump #{index}: {jump}m\n")
+                    index += 1   
+                deleteWhichJump = int(input("Which Jump would you like to delete?: "))
+                for jump in highJumpLog["height"]:
+                    if jump == highJumpLog["height"][deleteWhichJump - 1]:
+                        highJumpLog["height"].pop(deleteWhichJump - 1)
+                print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
 
-       
+
+            else:
+                print("Choose 1 or 2 dude")
        
             '''
             if the user inputs two we will print their training log by using an f string
