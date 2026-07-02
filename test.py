@@ -19,7 +19,7 @@ print(myList)
 for i in myList:
     if i < i+1:
         print(i)
-
+'''
 highJumpLog = {
     
     "height": [],
@@ -34,5 +34,9 @@ with open("high-jump-log.json", "w") as file:
     json_text = json.dumps(highJumpLog)
     file.write(json_text) 
     print(json_text)
+'''
 
-
+try:
+    john = input("enter your name")
+except KeyboardInterrupt:
+    print("\nbruh")

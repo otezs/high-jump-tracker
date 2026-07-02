@@ -37,7 +37,7 @@ def main():
 
         userInput = input("""Here is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
-        \n3. View your personal best and when it was achieved
+        \n3. View your average jump height and your personal best and when it was achieved
         \n4. Leave app
         \nPlease input the number corresponding with what action you want to do: """)
 
@@ -75,6 +75,7 @@ def main():
                     
                 except ValueError:
                     print("Please input a number.\n")
+
             elif addOrDelte == "2":
                 index = 1
                 print("Here is your training log:\n")
@@ -98,11 +99,14 @@ def main():
             '''
 
         elif userInput == "2":
-            index = 1
-            print("Here is your training log:\n")
-            for jump in highJumpLog["height"]:
-                print(f"Jump #{index}: {jump}m\n")
-                index += 1
+            if highJumpLog["height"] != []:
+                index = 1
+                print("Here is your training log:\n")
+                for jump in highJumpLog["height"]:
+                    print(f"Jump #{index}: {jump}m\n")
+                    index += 1
+            else:
+                print("\nYou have nothing in your training log\n")
             
             
             
@@ -116,11 +120,11 @@ def main():
             '''
 
         elif userInput == "3":
-            if highJumpLog != []:
+            if highJumpLog["height"] != []:
                 calcAvgHJ()
                 calcPB()
             else:
-                print("You do not have any jumps logged\n")
+                print("\nYou do not have any jumps logged\n")
                 
 
             
@@ -145,7 +149,6 @@ def calcAvgHJ():
         index += 1
     averageHeight = averageHeight/index
     print("Your average jump height is... " + str(round(averageHeight, 2)) + " meters!\n")
-    
 
 
 def calcPB():
