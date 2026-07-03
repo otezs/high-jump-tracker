@@ -1,4 +1,5 @@
 # High jump tracker v1.0 by Maxim Szeto
+import os
 import json
 
 # holds all of the high jump logs
@@ -9,9 +10,22 @@ highJumpLog = {
     
 }
 
-# when we open the file for the first time we have to load the previous jumps
-with open("high-jump-log.json", "r") as file:
-    highJumpLog = json.load(file)
+
+# 1. Finds the folder where main.py lives
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Glues the folder path and the filename together
+file_path = os.path.join(script_dir, "high-jump-log.json")
+
+ 
+# 3. We use 'file_path' instead of just the filename.
+try:
+    with open(file_path, "r") as file:
+        highJumpLog = json.load(file)
+
+except FileNotFoundError:
+    pass
+
 
 averageHeight = 0
 index = 0
@@ -35,7 +49,7 @@ def main():
     
     # this input will keep showing up until the user desides to leave the app
     while userInput != "5":
-        with open("high-jump-log.json", "w") as file:
+        with open(file_path, "w") as file:
             json.dump(highJumpLog, file)
 
         userInput = input("""\nHere is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
@@ -141,8 +155,30 @@ def main():
 
 
         elif userInput == "4":
+            pb = 0
+            for jump in highJumpLog["height"]:
+                if jump > pb:
+                    pb = jump
             try:    
-                userGoal = float(input("What is your high jump height goal?"))
+                userGoal = float(input("\nWhat is your high jump height goal?: "))
+                if userGoal <= 0.00:
+                    print("\nYou cant jump negative meters dude.")
+                elif userGoal <= pb:
+                    print("\nYou have already achieved that high of a jump\n")
+                elif pb / userGoal >= 0.95:
+                    calcGoal(pb, userGoal)
+                    print("This goal is within reach")
+                elif pb / userGoal >= 0.90:
+                    calcGoal(pb, userGoal)
+                    print("This goal is will be hard but you can do it!")
+                elif pb / userGoal >= 0.85:
+                    calcGoal(pb, userGoal)
+                    print("This goal is going to be challenging")
+                elif pb / userGoal >= 0.80:
+                    calcGoal(pb, userGoal)
+                    print("This goal is going to be pretty hard")
+                else:
+                    print("This goal is basically impossible")
                             
             except ValueError:
                 print("Please input a number.\n")
@@ -175,7 +211,10 @@ def calcPB():
             pb = jump
     print(f"Your Personal Best jump is {pb}m\n")
 
-def calcGoal():
-    pass
+def calcGoal(userPB, goal):
+    userProgress = round(userPB/goal, 2) * 100
+    print(f"\nCurrent PB: {userPB}m")
+    print(f"Goal: {goal}m")
+    print(f"Progress: {userProgress}%")
 
 main()
