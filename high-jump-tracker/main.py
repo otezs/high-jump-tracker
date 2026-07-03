@@ -13,7 +13,10 @@ highJumpLog = {
 with open("high-jump-log.json", "r") as file:
     highJumpLog = json.load(file)
 
-
+averageHeight = 0
+index = 0
+userInput = 0
+pb = 0
 
 
 askUserName = input("Welcome to Maxim's High jump App! Please enter your name: ")
@@ -21,7 +24,7 @@ if askUserName.lower() == "maxim":
     print("Developer mode activated! Welcome, Maxim!")
 else:
     print(f"Hello, {askUserName}! Thanks for using my High Jump App.")
-    print("--------------------------------------------------------------")
+print("--------------------------------------------------------------")
 
 
 # main function controls the major functionings of the app
@@ -31,14 +34,15 @@ def main():
     userInput = 0
     
     # this input will keep showing up until the user desides to leave the app
-    while userInput != "4":
+    while userInput != "5":
         with open("high-jump-log.json", "w") as file:
             json.dump(highJumpLog, file)
 
-        userInput = input("""Here is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
+        userInput = input("""\nHere is what you can do in the app:\n1. Add or delete a jump in your training log (in meters)
         \n2. View your training log
         \n3. View your average jump height and your personal best and when it was achieved
-        \n4. Leave app
+        \n4. Add new goal and see progress
+        \n5. Leave
         \nPlease input the number corresponding with what action you want to do: """)
 
         '''
@@ -75,6 +79,14 @@ def main():
                     
                 except ValueError:
                     print("Please input a number.\n")
+
+                '''
+                When we first ask them to delete a jump we first have to show them
+                there training log. Then we ask them which jump they want to delete
+                and then turn it into a integer so we can manipulate it. Then we look
+                at each jump in the log and if the jump is equal to the number of jump
+                they wanted gone minus one we delete it from the log
+                '''
 
             elif addOrDelte == "2":
                 index = 1
@@ -127,10 +139,15 @@ def main():
                 print("\nYou do not have any jumps logged\n")
                 
 
-            
 
-        
         elif userInput == "4":
+            try:    
+                userGoal = float(input("What is your high jump height goal?"))
+                            
+            except ValueError:
+                print("Please input a number.\n")
+        
+        elif userInput == "5":
             print("\nThanks for using my app! Bye!\n")
             exit()
         
@@ -158,6 +175,7 @@ def calcPB():
             pb = jump
     print(f"Your Personal Best jump is {pb}m\n")
 
-
+def calcGoal():
+    pass
 
 main()
