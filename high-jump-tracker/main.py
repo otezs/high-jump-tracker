@@ -2,21 +2,28 @@
 import os
 import json
 import time
+import sys
+
+arguments = sys.argv[1:]
+file_path = None
 
 # holds all of the high jump logs
 highJumpLog = {
-    
     "height": [],
     "date": []
-    
 }
-
 
 # 1. Finds the folder where main.py lives
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# 2. Glues the folder path and the filename together
-file_path = os.path.join(script_dir, "high-jump-log.json")
+if (len(sys.argv) > 1):
+    if (arguments[0] is not None):
+        # 1. if a filename is provided as a command-line argument, we use that instead of the default filename
+        file_path = os.path.join(script_dir, arguments[0])
+
+else:
+    # 2. Glues the folder path and the filename together
+    file_path = os.path.join(script_dir, "high-jump-log.json")
 
  
 # 3. We use 'file_path' instead of just the filename.
