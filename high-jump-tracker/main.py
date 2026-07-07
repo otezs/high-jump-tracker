@@ -68,7 +68,7 @@ def main():
                     newlog = round(newlog, 2)
 
                     if newlog <= 0.00:
-                        print("\nYou cant jump negative meters dude.")
+                        print("\nYou cant jump negative meters.")
 
                     elif newlog <= 1.00:
                         highJumpLog["height"].append(newlog)
@@ -150,7 +150,7 @@ def main():
                     print(f"Jump #{index}: {jump:.2f}m\n")
                     index += 1
             else:
-                print("\nYou have nothing in your training log\n")
+                print("\nThere is nothing in your training log\n")
                 time.sleep(3)
             
             while True:
@@ -238,7 +238,7 @@ def main():
         
 
         else:
-            print("\nThats not an option gurt\n")
+            print("\nThats not an option\n")
                 
 
 
