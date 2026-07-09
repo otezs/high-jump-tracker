@@ -83,6 +83,8 @@ def main():
                         print("\nAdded to log")
                         print(f"Wowza. {newlog:.2f} meters is amazing\n")
                     
+                    highJumpLog["date"].append(time.strftime("%Y-%m-%d - %I:%M %p", time.localtime()))
+
                 except ValueError:
                     print("Please input a number.\n")
                 
@@ -110,10 +112,11 @@ def main():
                         for jump in highJumpLog["height"]:
                             if jump == highJumpLog["height"][deleteWhichJump - 1]:
                                 del highJumpLog["height"][deleteWhichJump - 1]
+                                del highJumpLog["date"][deleteWhichJump - 1]
                         os.system("clear")
                         print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
                         time.sleep(2)
-                    except IndexError:
+                    except IndexError or ValueError:
                         print(f"\nThere is no jump #{deleteWhichJump}")
 
                 else:
@@ -142,8 +145,8 @@ def main():
             if highJumpLog["height"] != []:
                 index = 1
                 print("Here is your training log:\n")
-                for jump in highJumpLog["height"]:
-                    print(f"Jump #{index}: {jump:.2f}m\n")
+                for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
+                    print(f"Jump #{index}: {jump:.2f}m. logged on {date}\n")
                     index += 1
             else:
                 print("\nThere is nothing in your training log\n")
@@ -226,16 +229,16 @@ def main():
                     if userExit == "e":
                         break
                     
-            
-        
+
         elif userInput == "5":
             print("\nThanks for using my app! Bye!\n")
-            return 
+            exit()
         
 
         else:
             print("\nThats not an option\n")
-                
+
+               
 def calcAvgHJ():
     index = 0
     averageHeight = 0
@@ -248,10 +251,12 @@ def calcAvgHJ():
 
 def calcPB():
     pb = 0
-    for jump in highJumpLog["height"]:
+    pbDate = ""
+    for jump, date in zip(highJumpLog["height"], highJumpLog["date"]):
         if jump > pb:
             pb = jump
-    print(f"Your Personal Best jump is {pb}m\n")
+            pbDate = date
+    print(f"Your Personal Best jump is {pb}m and it was logged on {pbDate}\n")
 
 def calcGoal(userPB, goal):
     userProgress = round(userPB/goal, 2) * 100
