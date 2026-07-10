@@ -139,7 +139,7 @@ def main():
                             del highJumpLog["height"][deleteWhichJump - 1]
                             del highJumpLog["date"][deleteWhichJump - 1]
                             os.system(clearScreen)
-                            print(f"\nJump {deleteWhichJump} ({jump}m) has been deleted.\n")
+                            print(f"\nJump {deleteWhichJump} ({jump:.2f}m) has been deleted.\n")
                             time.sleep(2)
                         except ValueError:
                             print("\nNumbers only")
@@ -283,11 +283,11 @@ def calcPB():
         if jump > pb:
             pb = jump
             pbDate = date
-    print(f"Your Personal Best jump is {pb}m and it was logged on {pbDate}\n")
+    print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
 
 def calcGoal(userPB, goal):
     userProgress = round(userPB/goal, 2) * 100
-    print(f"\nCurrent PB: {userPB}m")
+    print(f"\nCurrent PB: {userPB:.2f}m")
     print(f"Goal: {goal:.2f}m")
     print(f"Progress: {userProgress}%")
 
