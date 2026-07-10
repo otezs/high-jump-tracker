@@ -55,7 +55,7 @@ time.sleep(2)
 def main():
     averageHeight = 0
     index = 0
-    userInput = 0
+    userInput = ""
     
     
     while userInput != "5": 
