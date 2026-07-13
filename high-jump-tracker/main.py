@@ -144,10 +144,11 @@ def main():
                                     
                             else:
                                 deleteWhichJump = int(deleteWhichJump)
+                                lastDeletedJump = highJumpLog["height"][deleteWhichJump -1]
                                 del highJumpLog["height"][deleteWhichJump - 1]
                                 del highJumpLog["date"][deleteWhichJump - 1]
                                 os.system(clearScreen)
-                                print(f"\nJump {deleteWhichJump} ({jump:.2f}m) has been deleted.\n")
+                                print(f"\nJump {deleteWhichJump} ({lastDeletedJump:.2f}m) has been deleted.\n")
                                 time.sleep(2)
                         except ValueError:
                             print("\nNumbers only")
