@@ -272,6 +272,7 @@ def main():
             os.system(clearScreen)
             print("\nThanks for using my app! Bye!\n")
             time.sleep(2)
+            os.system(clearScreen)
             exit()
         
 
