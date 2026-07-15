@@ -269,7 +269,9 @@ def main():
                     
 
         elif userInput == "5":
+            os.system(clearScreen)
             print("\nThanks for using my app! Bye!\n")
+            time.sleep(2)
             exit()
         
 
