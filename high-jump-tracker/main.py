@@ -143,6 +143,7 @@ def main():
                             if deleteWhichJump == "ALL":
                                 highJumpLog["height"] = []
                                 highJumpLog["date"] = []
+                                os.system(clearScreen)
                                 print("High jump log cleared")
                                 time.sleep(2)
                                     
