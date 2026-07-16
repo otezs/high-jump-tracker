@@ -40,3 +40,13 @@ def calcPB(log):
             pb = jump
             pbDate = date
     print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
+
+
+def calcAvgHJ(log):
+    index = 0
+    averageHeight = 0
+    for jump in log["height"]: 
+        averageHeight += jump
+        index += 1
+    averageHeight = averageHeight/index
+    print("Your average jump height is... " + str(round(averageHeight, 2)) + " meters!\n")

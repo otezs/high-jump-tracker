@@ -188,7 +188,7 @@ def main():
         elif userInput == "3":
             os.system(clearScreen)
             if highJumpLog["height"] != []:
-                calcAvgHJ(highJumpLog)
+                calculations.calcAvgHJ(highJumpLog)
                 calculations.calcPB(highJumpLog)
 
             else:
@@ -254,28 +254,6 @@ def main():
             print("\nThats not an option\n")
             time.sleep(2)
 
-
-def calcAvgHJ(log):
-    index = 0
-    averageHeight = 0
-    for jump in log["height"]: 
-        averageHeight += jump
-        index += 1
-    averageHeight = averageHeight/index
-    print("Your average jump height is... " + str(round(averageHeight, 2)) + " meters!\n")
-
-'''
-def calcPB(log):
-    pb = 0
-    pbDate = ""
-    # since we zip the height and date lists together when we find the pb we use the same index 
-    # and assign it to be the date of the pb
-    for jump, date in zip(log["height"], log["date"]):
-        if jump > pb:
-            pb = jump
-            pbDate = date
-    print(f"Your Personal Best jump is {pb:.2f}m and it was logged on {pbDate}\n")
-    '''
 
 def calcGoal(userPB, goal):
     userProgress = round(userPB/goal, 2) * 100
