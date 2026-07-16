@@ -49,4 +49,4 @@ def calcAvgHJ(log):
         averageHeight += jump
         index += 1
     averageHeight = averageHeight/index
-    print("Your average jump height is... " + str(round(averageHeight, 2)) + " meters!\n")
+    print(f"Your average jump height is... {averageHeight:.2f} meters!\n")
