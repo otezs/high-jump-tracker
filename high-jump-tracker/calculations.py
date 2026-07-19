@@ -84,3 +84,27 @@ def deleteLog(log, jump):
     del log["date"][jump - 1]
     print(f"\nJump {jump} ({lastDeletedJump:.2f}m) has been deleted.\n")
     time.sleep(2)
+
+def goalCalculation(goal, pb):
+    if goal <= 0.00:
+        print("\nYou cant jump negative meters dude.")
+        time.sleep(3)
+        #continue
+    elif goal <= pb:
+        print("\nYou have already achieved that high of a jump\n")
+        time.sleep(3)
+        #continue
+    elif pb / goal >= 0.95:
+        calcGoal(pb, goal)
+        print("This goal is within reach")
+    elif pb / goal >= 0.90:
+        calcGoal(pb, goal)
+        print("This goal is will be hard but you can do it!")
+    elif pb / goal >= 0.85:
+        calcGoal(pb, goal)
+        print("This goal is going to be challenging")
+    elif pb / goal >= 0.80:
+        calcGoal(pb, goal)
+        print("This goal is going to be pretty hard")
+    else:
+        print("This goal is basically impossible")

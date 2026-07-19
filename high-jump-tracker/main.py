@@ -189,28 +189,7 @@ def main():
                 
                 try:    
                     userGoal = float(input("\nWhat is your high jump height goal?: "))
-                    if userGoal <= 0.00:
-                        print("\nYou cant jump negative meters dude.")
-                        time.sleep(3)
-                        continue
-                    elif userGoal <= pb:
-                        print("\nYou have already achieved that high of a jump\n")
-                        time.sleep(3)
-                        continue
-                    elif pb / userGoal >= 0.95:
-                        calculations.calcGoal(pb, userGoal)
-                        print("This goal is within reach")
-                    elif pb / userGoal >= 0.90:
-                        calculations.calcGoal(pb, userGoal)
-                        print("This goal is will be hard but you can do it!")
-                    elif pb / userGoal >= 0.85:
-                        calculations.calcGoal(pb, userGoal)
-                        print("This goal is going to be challenging")
-                    elif pb / userGoal >= 0.80:
-                        calculations.calcGoal(pb, userGoal)
-                        print("This goal is going to be pretty hard")
-                    else:
-                        print("This goal is basically impossible")
+                    calculations.goalCalculation(userGoal, pb)
                                 
                 except ValueError:
                     print("Please input a number.\n")
