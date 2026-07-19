@@ -76,3 +76,11 @@ def deleteAllLogs(log):
     log["date"] = []
     print("High jump log cleared")
     time.sleep(2)
+
+def deleteLog(log, jump):
+    jump = int(jump)
+    lastDeletedJump = log["height"][jump -1]
+    del log["height"][jump - 1]
+    del log["date"][jump - 1]
+    print(f"\nJump {jump} ({lastDeletedJump:.2f}m) has been deleted.\n")
+    time.sleep(2)
