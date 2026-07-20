@@ -196,7 +196,7 @@ def main():
         
 
         else:
-            print("\nThats not an option\n")
+            print("\nThats not an option NERD.\n")
             time.sleep(2)
 
 
